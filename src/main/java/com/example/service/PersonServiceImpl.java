@@ -29,12 +29,19 @@ public class PersonServiceImpl implements PersonService {
     }
 
     public List<Person> listPeople() {
-        QueryResult<Person> res = getForceApi().query("SELECT Id, FirstName, LastName FROM contact", Person.class);
+        QueryResult<Person> res = getForceApi().query("SELECT Id, FirstName, LastName FROM contact limit 10", Person.class);
         return res.getRecords();
     }
-
+  
     public void removePerson(String id) {
         getForceApi().deleteSObject("contact", id);
+        getForceApi().getIdentity().getId();
     }
     
+    public String getUserLoggedIn()
+    {
+    	return getForceApi().getIdentity().getFirstName();
+    }
+    
+
 }
