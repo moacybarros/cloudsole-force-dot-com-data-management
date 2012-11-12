@@ -26,8 +26,8 @@
     </div>
 </div>
 
-<div class="container">
-    <div class="row">
+<div class="container-fluid">
+    <div class="row-fluid">
         <div class="span8 offset2">
             <div class="page-header">
                 <h1>Welcome to RocketForce</h1>
