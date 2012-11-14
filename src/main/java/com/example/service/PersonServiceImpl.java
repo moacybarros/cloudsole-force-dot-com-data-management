@@ -2,6 +2,7 @@ package com.example.service;
 
 import com.force.api.ApiSession;
 import com.force.api.ForceApi;
+import com.force.api.Identity;
 import com.force.api.QueryResult;
 import com.force.sdk.oauth.context.ForceSecurityContextHolder;
 import com.force.sdk.oauth.context.SecurityContext;
@@ -38,10 +39,11 @@ public class PersonServiceImpl implements PersonService {
         getForceApi().getIdentity().getId();
     }
     
-    public String getUserLoggedIn()
+    public Identity getUserLoggedIn()
     {
-    	return getForceApi().getIdentity().getFirstName();
+    	return getForceApi().getIdentity();
     }
+    
     
 
 }

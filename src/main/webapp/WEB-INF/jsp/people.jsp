@@ -28,7 +28,7 @@
           <a class="brand" href="#">RocketForce</a>
           <div class="nav-collapse collapse">
             <p class="navbar-text pull-right">
-              Logged in as ${loggedinUser}
+              Logged in as ${loggedinUser.getFirstName()}
             </p>
             <ul class="nav">
               <li class="active"><a href="#">Home</a></li>
@@ -67,7 +67,7 @@
         </div>
         <div class="span9">
         <div class="page-header">
-                <h1>Welcome to RocketForce</h1>
+                <h1>Welcome ${loggedinUser.getFirstName()}</h1>
             </div>
             <form:form method="post" action="add" commandName="person" class="form-vertical">
 

@@ -15,8 +15,7 @@ public class Person {
     @JsonProperty(value="LastName")
     private String lastName;
 
-
-    public String getId() {
+	public String getId() {
         return id;
     }
 
