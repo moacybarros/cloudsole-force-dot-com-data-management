@@ -97,6 +97,9 @@
          <div class="hero-unit">
                 <h1>Welcome ${loggedinUser.getFirstName()}</h1>
             </div>
+            <ul class="nav nav-tabs">
+            <li class="active">
+    		<a href="#">Create Contact</a>
             <form:form method="post" action="add" commandName="person" class="form-vertical">
 
                 <form:label path="firstName">First Name</form:label>
@@ -105,8 +108,8 @@
                 <form:input path="lastName" />
                 <input type="submit" value="Add Person" class="btn"/>
             </form:form>
-
-
+			</li>
+			<li><a href="#">View Contact</a>
             <c:if  test="${!empty peopleList}">
                 <h3>People</h3>
                 <table class="table table-bordered table-striped">
@@ -126,6 +129,8 @@
                     </tbody>
                 </table>
             </c:if>
+           </li>
+          </ul>
         </div>
     </div>
 </div>
