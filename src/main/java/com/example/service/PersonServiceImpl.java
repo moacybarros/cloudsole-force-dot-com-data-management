@@ -36,7 +36,6 @@ public class PersonServiceImpl implements PersonService {
   
     public void removePerson(String id) {
         getForceApi().deleteSObject("contact", id);
-        getForceApi().getIdentity().getId();
     }
     
     public Identity getUserLoggedIn()
