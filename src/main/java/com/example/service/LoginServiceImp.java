@@ -1,10 +1,14 @@
 package com.example.service;
 
+import org.springframework.stereotype.Service;
+
 import com.force.api.ApiSession;
 import com.force.api.ForceApi;
+import com.force.api.Identity;
 import com.force.sdk.oauth.context.ForceSecurityContextHolder;
 import com.force.sdk.oauth.context.SecurityContext;
 
+@Service
 public class LoginServiceImp implements LoginService {
 
 	@Override
@@ -17,6 +21,12 @@ public class LoginServiceImp implements LoginService {
         apiSession.setApiEndpoint(sc.getEndPointHost());
 
         return new ForceApi(apiSession);
+	}
+
+	@Override
+	public Identity getUserLoggedIn() {
+		// TODO Auto-generated method stub
+		return LoginToSalesforce().getIdentity();
 	}
 
 }

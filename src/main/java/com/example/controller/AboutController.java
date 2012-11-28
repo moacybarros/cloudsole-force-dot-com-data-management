@@ -12,10 +12,10 @@ public class AboutController {
 	
 	@RequestMapping("/about")
     public String AboutMe(Map<String, String> map) 
-	{
-		
+	{	
 		map.put("Author", "Thys Michels");
 		map.put("Email", "thysmichels@gmail.com");
+		map.put("Website", "http://thysmichels.com");
         return "about";
     }
 

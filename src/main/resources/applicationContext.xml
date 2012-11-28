@@ -34,5 +34,31 @@
     <security:http use-expressions="true">
         <security:intercept-url pattern="/login/*" access="isAuthenticated()" />
     </security:http>
+    
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+  		<property name="host"><value>smtp.gmail.com"</value></property>
+  		<property name="port"><value>587</value></property>
+        <property name="protocol"><value>smtp</value></property>
+        <property name="username"><value>oriontech7@gmail.com</value></property>
+        <property name="password"><value>Andries7</value></property>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.smtp.quitwait">false</prop>
+            </props>
+        </property>
+	</bean>	
+
+	<!-- this is a template message that we can pre-load with default state -->
+	<bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage">
+ 	 	<property name="from" value="thysmichels@gmail.com"/>
+  		<property name="subject" value="RocketForce Contact Me"/>
+	</bean>
+    
+    <bean id="contactMeEmail" class="com.example.service.EmailServiceImpl">
+  		<property name="mailSender" ref="mailSender"/>
+  		<property name="templateMessage" ref="templateMessage"/>
+	</bean>
 
 </beans>

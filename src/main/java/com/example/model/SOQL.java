@@ -1,5 +1,6 @@
 package com.example.model;
 
-public class SOQL {
+public class SOQL 
+{
 
 }

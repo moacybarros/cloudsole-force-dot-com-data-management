@@ -96,10 +96,11 @@
         
         </div>
         <div class="span9">
-         <div class="hero-unit">
-                <h1>Author: ${Author}</h1>
-                <h1>Email:  ${Email}</h1>
-            </div>
+         	<blockquote class="pull-right">
+               <p> Author: ${Author} </p>
+               <small> Email: <a href="mailto:${Email}?Subject=RocketForce">${Email}</a> </small>
+               <small> WebSite: <a href="${Website}">${Website}</a> </small>
+         	</blockquote>
          </div>
     </div>
 </div>
