@@ -37,9 +37,15 @@
     
     <servlet-mapping>
         <servlet-name>spring</servlet-name>
-        <url-pattern>/people/*</url-pattern>
+        <url-pattern>/login/*</url-pattern>
     </servlet-mapping>
-
+	
+	<servlet-mapping>
+        <servlet-name>spring</servlet-name>
+        <url-pattern>/about/*</url-pattern>
+    </servlet-mapping>
+	
+	
     <servlet-mapping>
         <servlet-name>spring</servlet-name>
         <url-pattern>/assets/*</url-pattern>

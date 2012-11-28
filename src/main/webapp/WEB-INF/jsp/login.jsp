@@ -49,8 +49,8 @@
             </p>
             <ul class="nav">
               <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li><a href="/login/about/">About</a></li>
+              <li><a href="/login/contact/">Contact</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -63,7 +63,7 @@
         <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">Administration</li>
-              <li class="active"><a href="#">VisualForce Builder</a></li>
+              <li><a href="#">VisualForce Builder</a></li>
               <li><a href="#">SOQL</a></li>
               <li><a href="#">Metadata Export</a></li>
               <li><a href="#">REST</a></li>
@@ -97,41 +97,7 @@
          <div class="hero-unit">
                 <h1>Welcome ${loggedinUser.getFirstName()}</h1>
             </div>
-            <ul class="nav nav-tabs">
-            <li class="active">
-    		<a href="#">Create Contact</a>
-            <form:form method="post" action="add" commandName="person" class="form-vertical">
-
-                <form:label path="firstName">First Name</form:label>
-                <form:input path="firstName" />
-                <form:label path="lastName">Last Name</form:label>
-                <form:input path="lastName" />
-                <input type="submit" value="Add Person" class="btn"/>
-            </form:form>
-			</li>
-			<li><a href="#">View Contact</a>
-            <c:if  test="${!empty peopleList}">
-                <h3>People</h3>
-                <table class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>&nbsp;</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${peopleList}" var="person">
-                        <tr>
-                            <td>${person.lastName}, ${person.firstName}</td>
-                            <td><form action="delete/${person.id}" method="post"><input type="submit" class="btn btn-danger btn-mini" value="Delete"/></form></td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </c:if>
-           </li>
-          </ul>
-        </div>
+         </div>
     </div>
 </div>
 

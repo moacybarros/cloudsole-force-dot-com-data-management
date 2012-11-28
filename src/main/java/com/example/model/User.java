@@ -1,5 +1,9 @@
 package com.example.model;
 
-public class User {
+import java.util.List;
 
+public class User 
+{
+
+	
 }

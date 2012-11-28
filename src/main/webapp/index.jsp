@@ -68,8 +68,8 @@
       <div class="masthead">
         <ul class="nav nav-pills pull-right">
           <li class="active"><a href="#">Home</a></li>
-          <li><a href="/About/">About</a></li>
-          <li><a href="/Contact/">Contact</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/contact/">Contact</a></li>
         </ul>
         <h3 class="muted">RocketForce</h3>
       </div>
@@ -79,7 +79,7 @@
       <div class="jumbotron">
         <h1>Welcome to RocketForce</h1>
         <p class="lead">RocketLawyer Salesforce Administration Portal</p>
-        <a class="btn btn-large btn-success" href="/people/">Sign in</a>
+        <a class="btn btn-large btn-success" href="/login/">Sign in</a>
       </div>
 
       <hr>
@@ -95,8 +95,8 @@
           <h4>Access REST interface</h4>
           <p>Access Salesforce REST interface.</p>
           
-          <h4>Todo</h4>
-          <p>Todo</p>
+          <h4>Metadata Viewer</h4>
+          <p>View Metadata of all salesforce sObjects</p>
           
           <h4>Todo</h4>
           <p>Todo</p>

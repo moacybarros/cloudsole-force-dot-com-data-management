@@ -2,19 +2,21 @@ package com.example.controller;
 
 import java.util.Map;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.model.Person;
 
+@Controller
 public class AboutController {
 	
-	@RequestMapping("/About")
-    public String AboutMe() {
-		String me = "Author: Thys Michels";
-      
-      
-        
-        return me;
+	@RequestMapping("/about")
+    public String AboutMe(Map<String, String> map) 
+	{
+		
+		map.put("Author", "Thys Michels");
+		map.put("Email", "thysmichels@gmail.com");
+        return "about";
     }
 
 }

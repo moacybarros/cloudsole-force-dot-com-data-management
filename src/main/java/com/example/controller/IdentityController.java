@@ -1,5 +1,6 @@
 package com.example.controller;
 
-public class IdentityController {
+public class IdentityController 
+{
 
 }
