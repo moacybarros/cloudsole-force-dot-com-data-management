@@ -68,8 +68,6 @@
       <div class="masthead">
         <ul class="nav nav-pills pull-right">
           <li class="active"><a href="#">Home</a></li>
-          <li><a href="/about/">About</a></li>
-          <li><a href="/contact/">Contact</a></li>
         </ul>
         <h3 class="muted">RocketForce</h3>
       </div>

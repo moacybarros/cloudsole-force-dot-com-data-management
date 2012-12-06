@@ -59,40 +59,21 @@
 
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="span3">
-        <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-              <li class="nav-header">Administration</li>
-              <li><a href="#">VisualForce Builder</a></li>
-              <li><a href="#">SOQL</a></li>
-              <li><a href="#">Metadata Export</a></li>
-              <li><a href="#">REST</a></li>
-              <li class="nav-header">Testing</li>
-              <li><a href="#">Create Test</a></li>
-              <li><a href="#">Run Scheduled Test</a></li>
-              <li class="nav-header">Monitoring</li>
-              <li><a href="#">Records Created</a></li>
-              <li><a href="#">Debugger</a></li>
-              <li><a href="#">Set Trigger</a></li>
-              <li class="nav-header">Data</li>
-              <li><a href="#">Export To CSV</a></li>
-              <li><a href="#">Import to CSV</a></li>
-              <li><a href="#">Create Batch Job</a></li>
-              <li class="nav-header">Connect</li>
-              <li><a href="#">MySQL</a></li>
-              <li><a href="#">RabbitMQ</a></li>
-              <li><a href="#">StreamingAPI</a></li>
-              <li><a href="#">Box</a></li>
-              <li><a href="#">Dropbox</a></li>
-              <li class="nav-header">Extra</li>
-              <li><a href="#">Social</a></li>
-              <li><a href="#">Maps</a></li>
-              <li><a href="#">Mass Emails</a></li>
-              <li><a href="#">Chatter Feed Update</a></li>
+        <div class="span3 bs-docs-sidebar">
+        	<ul class="nav nav-list bs-docs-sidenav">
+              <li><a href="#"><i class="icon-chevron-right"></i>Manage Users</a></li>
+              <li><a href="#"><i class="icon-chevron-right"></i>Manage Account</a></li>
+              <li><a href="#"><i class="icon-chevron-right"></i>Manage Contact</a></li>
+              <li><a href="#"><i class="icon-chevron-right"></i>Manage Opportunity</a></li>
+              <li><a href="#"><i class="icon-chevron-right"></i>Manage Campaign</a></li>
+              <li><a href="#"><i class="icon-chevron-right"></i>Manage Case</a></li>
+              <li><a href="#"><i class="icon-chevron-right"></i>Manage Chatter</a></li>
+              <li><a href="#"><i class="icon-chevron-right"></i>Manage Lead</a></li>
+              <li><a href="#"><i class="icon-chevron-right"></i>Manage Task</a></li>
+              <li><a href="#"><i class="icon-chevron-right"></i>Export To CSV</a></li>
+              
             </ul>
           </div>
-        
-        </div>
         <div class="span9">
 		<form:form method="post" action="send" commandName="contact" class="form-horizontal">
 			<fieldset>

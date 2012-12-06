@@ -27,8 +27,8 @@
 
     <fss:oauth>
         <fss:oauthInfo endpoint="http://login.salesforce.com"
-                       oauth-key="3MVG9ytVT1SanXDnFpH_pFaMj05fwWmRKO_6yE6wtB1dan.I4Gd5B6YfEc6zBw48fIkmTzdVoKzy205qZrWb9"
-                       oauth-secret="333886780207357967"/>
+                       oauth-key=""
+                       oauth-secret=""/>
     </fss:oauth>
     
     <security:http use-expressions="true">
@@ -39,8 +39,8 @@
   		<property name="host"><value>smtp.gmail.com"</value></property>
   		<property name="port"><value>587</value></property>
         <property name="protocol"><value>smtp</value></property>
-        <property name="username"><value>oriontech7@gmail.com</value></property>
-        <property name="password"><value>Andries7</value></property>
+        <property name="username"><value></value></property>
+        <property name="password"><value></value></property>
         <property name="javaMailProperties">
             <props>
                 <prop key="mail.smtp.auth">true</prop>
