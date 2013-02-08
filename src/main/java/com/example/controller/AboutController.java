@@ -2,21 +2,23 @@ package com.example.controller;
 
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.model.Person;
+import com.example.service.LoginService;
 
 @Controller
 public class AboutController {
+    @Autowired
+    private LoginService loginService;
 	
-	@RequestMapping("/about")
-    public String AboutMe(Map<String, String> map) 
+	@RequestMapping("/login/about")
+    public String AboutMe(Map<String, Object> map) 
 	{	
-		map.put("Author", "Thys Michels");
-		map.put("Email", "thysmichels@gmail.com");
-		map.put("Website", "http://thysmichels.com");
-        return "about";
+		 map.put("loggedinUser", loginService.getUserLoggedIn());
+		 return "about";
     }
 
 }

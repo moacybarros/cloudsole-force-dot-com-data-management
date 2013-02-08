@@ -14,7 +14,7 @@ public class SOQLServiceImpl implements SOQLService
 	@Override
 	public List<String> runSOQLQuery(String sObject, String fields,
 			String limit, String group) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 	

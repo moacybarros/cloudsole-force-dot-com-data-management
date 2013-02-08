@@ -97,9 +97,9 @@
         </div>
         <div class="span9">
          	<blockquote class="pull-right">
-               <p> Author: ${Author} </p>
-               <small> Email: <a href="mailto:${Email}?Subject=RocketForce">${Email}</a> </small>
-               <small> WebSite: <a href="${Website}">${Website}</a> </small>
+               <p> Author: ${loggedinUser.getFirstName()} </p>
+               <small> Email: <a href="mailto:${loggedinUser.getEmail()}?Subject=RocketForce">${loggedinUser.getEmail()}</a> </small>
+               <small> Locale: <a href="${loggedinUser.getLocale()}">${loggedinUser.getLocale()}</a> </small>
          	</blockquote>
          </div>
     </div>
