@@ -2,7 +2,7 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.example</groupId>
-    <artifactId>RocketForce</artifactId>
+    <artifactId>CloudSoleSOQLExplorer</artifactId>
     <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
 
@@ -21,7 +21,6 @@
             <id>webjars</id>
             <url>http://webjars.github.com/m2</url>
         </repository>
-        
     </repositories>
 
     <dependencies>
@@ -128,6 +127,10 @@
             </plugin>
         </plugins>
     </build>
-    <name>RocketForce</name>
-    <description>Rocket Lawyer Salesforce Administration Tool</description>
+    <name>CloudSole</name>
+    <description>CloudSole SOQL Explorer</description>
+    <organization>
+    	<name>Thys Michels</name>
+    	<url>http://www.thysmichels.com</url>
+    </organization>
 </project>
