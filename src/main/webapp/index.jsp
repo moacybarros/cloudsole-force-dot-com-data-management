@@ -6,10 +6,10 @@
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
-    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="http://twitter.github.com/bootstrap/assets/css/docs.css" rel="stylesheet">
-    <link href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet">
+   <link href="/resources/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="/resources/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/resources/bootstrap/css/docs.css" rel="stylesheet">
+    <link href="/resources/bootstrap/css/prettify.css" rel="stylesheet">
     
     <!--
     IMPORTANT:
