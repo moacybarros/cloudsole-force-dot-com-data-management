@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   	 <!-- Bootstrap framework -->
     <link href="/resources/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link href="/resources/bootstrap/ss/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/resources/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
     <link href="/resources/bootstrap/css/docs.css" rel="stylesheet">
     <link href="/resources/bootstrap/css/prettify.css" rel="stylesheet">
     <style type="text/css" media="screen">
