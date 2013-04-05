@@ -33,7 +33,10 @@ Then run it with:
     $ java -jar target/dependency/webapp-runner.jar target/*.war
 
 Screenshots:
-    ![ScreenShot](https://raw.github.com/thysmichels/cloudsole-force-dot-com-data-management/blob/master/img/CloudSole%20Force.com%20Data%20Management.png)
+    ![ScreenShot](https://github.com/thysmichels/cloudsole-force-dot-com-data-management/raw/master/img/CloudSole%20Force.com%20Data%20Management.png "Login Screen")
+    ![ScreenShot](https://github.com/thysmichels/cloudsole-force-dot-com-data-management/raw/master/img/CloudSole%20Data%20Management%202.png "SOQL Query Screen")
+    ![ScreenShot](https://github.com/thysmichels/cloudsole-force-dot-com-data-management/raw/master/img/CloudSole%20Data%20Management%203 "Table SOQL Query Screen")
+    ![ScreenShot](https://github.com/thysmichels/cloudsole-force-dot-com-data-management/raw/master/img/CloudSole%20Data%20Management%205 "Edit Screen")
 
 
 Try it now: http://cloudsole.herokuapp.com
