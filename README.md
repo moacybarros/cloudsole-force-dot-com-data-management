@@ -31,7 +31,11 @@ Build with:
 Then run it with:
 
     $ java -jar target/dependency/webapp-runner.jar target/*.war
-    
-Try it out: http://cloudsole.herokuapp.com
+
+Screenshots:
+    ![Alt text](thysmichels/cloudsole-force-dot-com-data-management/img/CloudSole Force.com Data Management.png "Login Screen")
+
+
+Try it now: http://cloudsole.herokuapp.com
 
 
