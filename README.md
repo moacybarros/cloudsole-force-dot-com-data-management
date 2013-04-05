@@ -1,5 +1,7 @@
 # Spring MVC REST API Data Management Application
 
+    Try it now: http://cloudsole.herokuapp.com
+
 CloudSole is your Force.com cloud console to query, create, update and delete any record in your Salesforce org. This web application uses Spring MVC, Force.com REST API.
 
 ## Running the application locally
@@ -38,7 +40,5 @@ Screenshots:
     ![ScreenShot](https://github.com/thysmichels/cloudsole-force-dot-com-data-management/raw/master/img/CloudSole%20Data%20Management%203.png "Table SOQL Query Screen")
     ![ScreenShot](https://github.com/thysmichels/cloudsole-force-dot-com-data-management/raw/master/img/CloudSole%20Data%20Management%205.png "Edit Screen")
 
-
-Try it now: http://cloudsole.herokuapp.com
 
 
