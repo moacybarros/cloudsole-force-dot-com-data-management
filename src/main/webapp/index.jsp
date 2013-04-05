@@ -63,7 +63,7 @@
 <div class="container">
   <div class="marketing">
     <h1>Click to Login.</h1>
-    <p class="marketing-byline">If you don't have a Salesforce account please contact the Salesforce administrator</p>
+    <p class="marketing-byline">If you don't have a Salesforce account please contact your Salesforce administrator</p>
    </div>
 </div>
  </body>
