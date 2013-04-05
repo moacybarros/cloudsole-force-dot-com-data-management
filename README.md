@@ -35,8 +35,8 @@ Then run it with:
 Screenshots:
     ![ScreenShot](https://github.com/thysmichels/cloudsole-force-dot-com-data-management/raw/master/img/CloudSole%20Force.com%20Data%20Management.png "Login Screen")
     ![ScreenShot](https://github.com/thysmichels/cloudsole-force-dot-com-data-management/raw/master/img/CloudSole%20Data%20Management%202.png "SOQL Query Screen")
-    ![ScreenShot](https://github.com/thysmichels/cloudsole-force-dot-com-data-management/raw/master/img/CloudSole%20Data%20Management%203 "Table SOQL Query Screen")
-    ![ScreenShot](https://github.com/thysmichels/cloudsole-force-dot-com-data-management/raw/master/img/CloudSole%20Data%20Management%205 "Edit Screen")
+    ![ScreenShot](https://github.com/thysmichels/cloudsole-force-dot-com-data-management/raw/master/img/CloudSole%20Data%20Management%203.png "Table SOQL Query Screen")
+    ![ScreenShot](https://github.com/thysmichels/cloudsole-force-dot-com-data-management/raw/master/img/CloudSole%20Data%20Management%205.png "Edit Screen")
 
 
 Try it now: http://cloudsole.herokuapp.com
