@@ -55,7 +55,7 @@
  <div class="jumbotron masthead">
   <div class="container">
     <h1>CloudSole</h1>
-    <p>Salesforce Data Management Portal</p>
+    <p>Salesforce Data Management Tool</p>
     <p><a href="/login/" class="btn btn-primary btn-large">Login</a></p>
   </div>
 </div>
