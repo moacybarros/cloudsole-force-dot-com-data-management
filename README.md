@@ -16,12 +16,13 @@ Add environment variables for authenticating to Salesforce.com (replace the valu
 
         $ export OAUTH_CLIENT_KEY=3MVM3_GuVCQ3gmEE5al72RmBfiAWhBX5O2wYc9zTZ8ytj1E3NF7grV_G99OxTyEcY71Tc46TOvzK_rzoyYYPk
         $ export OAUTH_CLIENT_SECRET=1319558946720906100
-        $ export EMAIL_ADDRESS=youremail@address.com
+        $ export EMAIL_PASSWORD=youremailpassword
 
 - On Windows:
 
         $ set OAUTH_CLIENT_KEY=3MVM3_GuVCQ3gmEE5al72RmBfiAWhBX5O2wYc9zTZ8ytj1E3NF7grV_G99OxTyEcY71Tc46TOvzK_rzoyYYPk
         $ set OAUTH_CLIENT_SECRET=1319558946720906100
+        $ set EMAIL_PASSWORD=youremailpassword
 
 Build with:
 
