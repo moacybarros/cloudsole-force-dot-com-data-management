@@ -2,8 +2,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-<div class="span9">
+<div class="span8">
          <section id="manage-users">
           <div class="page-header">
             <h1>Manage ${currentSObject} Object</h1>
@@ -12,7 +11,7 @@
            <div class="alert alert-success">
           	 <button type="button" class="close" data-dismiss="alert">×</button>
  			 <strong>Success:</strong>
- 			 	Your record has been created - Id: ${sobjectsuccesscreate}
+ 			 	Your record has been created. Id: ${sobjectsuccesscreate}
 		   </div>
 		   </c:if>
 		   <c:if  test="${!empty sobjectsuccessdelete}">
@@ -20,6 +19,13 @@
           	 <button type="button" class="close" data-dismiss="alert">×</button>
  			 <strong>Success:</strong>
  			 	Your record was deleted successfully
+		   </div>
+		   </c:if>
+		   <c:if  test="${!empty sobjectsuccessedit}">
+           <div class="alert alert-success">
+          	 <button type="button" class="close" data-dismiss="alert">×</button>
+ 			 <strong>Success:</strong>
+ 			 	Your record was updated successfully. Id: ${sobjectsuccessedit}
 		   </div>
 		   </c:if>
 		   <c:if  test="${!empty sobjecterror}">
@@ -59,20 +65,36 @@
                     <tr>
                     <th>Delete</th>
                     <th>Edit</th>
-                    <c:forEach items="${sobjectFieldNames}" var="fieldNames">
-                        <th>${fieldNames}</th>
-                     </c:forEach>
+                    <c:forEach items="${sobjectFieldNames}" var="fieldNames" varStatus="innerColumn">
+                    <c:choose>
+                     <c:when test="${innerColumn.first}"></c:when>
+                    	<c:otherwise>
+                     		 <th>${fieldNames}</th>
+                    	 </c:otherwise>
+                     </c:choose>
+         
+                    </c:forEach>
                     <c:if test="${!empty sobjectRecords}">
                    	 	<c:forEach items="${sobjectRecords}" var="sobjectRecords" varStatus="outer">
                    	 	<tr>
                    	 		 <c:forEach items="${sobjectRecords}" var="sobjectRecord" varStatus="inner">
-                   	 		 <c:if test="${inner.first}">
-                   	 		 	<td><form action="/login/sobject/delete/${currentSObject}/${sobjectRecord}" method="post"><input type="submit" class="btn btn-danger btn-mini" value="Delete"/></form></td>
-                   	 		 	<td><form action="/login/sobject/edit/${currentSObject}/${sobjectRecord}" method="post"><input type="submit" class="btn btn-danger btn-mini" value="Edit"/></form></td>
-                   	 		 </c:if>
-                   	 	 	<td>
-                    			${sobjectRecord}
-                    		</td>
+                   	 		 <c:choose>
+                   	 		 <c:when test="${inner.first}">
+                   
+                   	 		 </c:when>
+                   	 		 <c:when test="${inner.index == 1}">
+                   	 		 	<td><form action="/login/sobject/delete/${currentSObject}/${sobjectRecord.value}" method="post"><input type="submit" class="btn btn-danger btn-mini" value="Delete"/></form></td>
+                   	 		 	<td><form action="/login/sobject/edit/${currentSObject}/${sobjectRecord.value}" method="post"><input type="submit" class="btn btn-danger btn-mini" value="Edit"/></form></td>
+                   	 		 	<td>
+                    				${sobjectRecord.value}
+                    			</td>
+                   	 		 </c:when>
+                   	 		 <c:otherwise>
+                   	 		 	<td>
+                    				${sobjectRecord.value}
+                    			</td>
+                   	 		 </c:otherwise>
+                   	 		 </c:choose>
                     		</c:forEach>
                     	</tr> 
                     	</c:forEach>	
@@ -83,11 +105,9 @@
                 <div class="pagination">
   				<ul>
   					<c:if  test="${!empty pagination}">
-  					<li><a href="#">Prev</a></li>
-  					<c:forEach items="${pagination}" var="pagination">
-  					<li><a href="${pagination.value}">${pagination.key}</a></li>
+  					<c:forEach items="${pagination}" var="pagination" >
+  						<li><a href="${pagination.value}">${pagination.key}</a></li>
   					</c:forEach>
-  					<li><a href="#">Next</a></li>
   					</c:if>
   				</ul>
   				</div>
@@ -102,18 +122,18 @@
           	 		<c:forEach items="${requiredSobjectFieldNames}" var="requiredSobjectFieldNames">
                 		<label class="control-label">${requiredSobjectFieldNames.key}</label>
                 		<div class="controls">
-                			<input type="text" name="${requiredSobjectFieldNames.key}" id="${requiredSobjectFieldNames.key}" required>${requiredSobjectFieldNames.value}</input>
+                			<input type="text" name="${requiredSobjectFieldNames.key}" id="${requiredSobjectFieldNames.key}" required />
                 		</div>
                 	</c:forEach>
                     </div> 
-          	 		<c:forEach items="${optionalSobjectFieldNames}" var="optionalSobjectFieldNames">
-          	 		<div class="control-group">
+                    <div class="control-group">
+          	 			<c:forEach items="${optionalSobjectFieldNames}" var="optionalSobjectFieldNames">
                 		<label class="control-label">${optionalSobjectFieldNames.key}</label>
                 		<div class="controls">
-                			<input type="text" name="${optionalSobjectFieldNames.key}" id="${optionalSobjectFieldNames.key}">${optionalSobjectFieldNames.value}</input>
+                			<input type="text" name="${optionalSobjectFieldNames.key}" id="${optionalSobjectFieldNames.key}" />
                 		</div>
-                	</div>
                 	</c:forEach>
+                	</div>
                 	 
                 	<button class="btn" type="submit">Save ${currentSObject}</button>
            		 </form>
@@ -122,25 +142,17 @@
           	</div>
           	<div class="tab-content">
           	  	<div id="/login/sobject/edit/${currentSObject}/${sobjectRecord}" class="tab-pane active">
-          	 	  <c:if  test="${!empty requiredSobjectFieldNames}">
-          	 		<form method="post" action="" class="form-horizontal">
+          	 	  <c:if  test="${!empty requiredEditSobjectFieldNames}">
+          	 		<form method="post" action="/login/sobject/save/${currentSObject}/${sobjectRecord}" class="form-horizontal">
           	 		<div class="control-group">
-          	 		<c:forEach items="${requiredSobjectFieldNames}" var="requiredSobjectFieldNames">
-                		<label class="control-label">${requiredSobjectFieldNames.key}</label>
+          	 		<c:forEach items="${requiredEditSobjectFieldNames}" var="requiredEditSobjectFieldNames">
+                		<label class="control-label">${requiredEditSobjectFieldNames.key}</label>
                 		<div class="controls">
-                			<input type="text" name="${requiredSobjectFieldNames.key}" id="${requiredSobjectFieldNames.key}" required>${requiredSobjectFieldNames.value}</input>
+                			<input type="text" name="${requiredEditSobjectFieldNames.key}" id="${requiredEditSobjectFieldNames.key}" value="${requiredEditSobjectFieldNames.value}">
                 		</div>
                 	</c:forEach>
                     </div> 
-          	 		<c:forEach items="${optionalSobjectFieldNames}" var="optionalSobjectFieldNames">
-          	 		<div class="control-group">
-                		<label class="control-label">${optionalSobjectFieldNames.key}</label>
-                		<div class="controls">
-                			<input type="text" name="${optionalSobjectFieldNames.key}" id="${optionalSobjectFieldNames.key}">${optionalSobjectFieldNames.value}</input>
-                		</div>
-                	</div>
-                	</c:forEach>
-                	 
+                   
                 	<button class="btn" type="submit">Save ${currentSObject}</button>
            		 </form>
            		 </c:if>

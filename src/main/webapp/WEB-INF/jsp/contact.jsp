@@ -6,7 +6,7 @@
 <jsp:include page="header.jsp"/>
 
        <div class="span9">
-		<form class="form-horizontal well" method="POST" action="">
+		<form class="form-horizontal" method="POST" action="">
 			<fieldset>
 				<legend>Contact Us:</legend>
 				<div class="control-group">

@@ -43,11 +43,15 @@ import com.force.api.QueryResult;
 public class SObjectController 
 {
 	private static final Logger logger = LoggerFactory.getLogger(SObjectController.class);
+	final static Integer PAGESIZE = 100;
 	private static final String SELECT = "SELECT ";
 	private static final String FROM = "FROM ";
-	private static List<String> sObjectFieldNames = new ArrayList<String>();
+	private static List<String> sObjectFieldNames = null;
 	private static QueryResult<Map> res = null;
-	final Integer PAGESIZE = 100;
+	private static String[][] recordMatrix = null;
+	private static String[][] pageMatrix = null;
+	private static Map<String, String> paginationPages =null;
+	private static Integer colNumber = 0;
 	
 	@Autowired
     private LoginService loginService;
@@ -56,8 +60,7 @@ public class SObjectController
 	 public String viewSObjects(@PathVariable("sobjectName") String sObjectName, Map<String, Object> map){
 		try
 		{
-			List<Field> sObjectFields = loginService.LoginToSalesforce().describeSObject(sObjectName).getFields();
-			for (Field listOfField : sObjectFields)
+			for (Field listOfField : loginService.LoginToSalesforce().describeSObject(sObjectName).getFields())
 			{
 				sObjectFieldNames.add(listOfField.getName().toString());
 			}
@@ -77,6 +80,7 @@ public class SObjectController
 	{
 		try
 		{
+			sObjectFieldNames = new ArrayList<String>();
 			StringBuilder buildSoqlQuery = new StringBuilder();
 			buildSoqlQuery.append(SELECT);
 		
@@ -107,77 +111,9 @@ public class SObjectController
 	@RequestMapping(value="/query/{sobjectName}/{pageNumber}")
 	public String querySObjectsReturnViewPaging(@PathVariable("sobjectName") String sObjectName, @PathVariable("pageNumber") Integer pageNumber, HttpServletRequest request, Map<String, Object> map, HttpServletResponse response) throws HttpMessageNotReadableException, IOException
 	{
-		Iterator<String> iterCol = null;
-		Iterator<String> iterColkey = null;
-		String[][] recordMatrix = null;
-		final Map<String, String> paginationPages = new HashMap<String, String>();
-		
-		Integer pagecounter=Math.abs(res.getTotalSize()/100)+1;
-		for (Integer k = 0; k<res.getTotalSize(); k+=PAGESIZE, pagecounter--)
-		{
-			paginationPages.put(pagecounter.toString(), "/login/sobject/query/"+ sObjectName +"/" + pagecounter.toString());
-		}
-		
-		if (res.getTotalSize() > 100*pageNumber)
-		{
-			recordMatrix = new String[res.getRecords().subList((100*pageNumber)-100, 100*pageNumber).size()][res.getRecords().get(0).keySet().size()];
-			for (int k=(100*pageNumber)-100; k< res.getRecords().subList((100*pageNumber)-100, 100*pageNumber).size(); k++)
-			{
-				int counter = 0;
-				iterCol = res.getRecords().get(k).values().iterator();
-				iterColkey = res.getRecords().get(k).keySet().iterator();
-	
-				if (iterCol.hasNext())
-				{
-					iterCol.next();
-				}
-				if (iterColkey.hasNext())
-				{
-					iterColkey.next();
-				}
-	
-				while (iterCol.hasNext())
-				{
-					recordMatrix[k][counter] = String.valueOf(iterCol.next());
-					counter++;
-				}
-			}
-		}
-		else
-		{
-			recordMatrix = new String[res.getRecords().subList((100*(pageNumber-1)), res.getTotalSize()).size()][res.getRecords().get(0).keySet().size()];
-			for (int k=(100*(pageNumber-1)); k< res.getRecords().subList((100*(pageNumber-1)), res.getTotalSize()).size(); k++)
-			{
-				int counter = 0;
-				iterCol = res.getRecords().get(k).values().iterator();
-				iterColkey = res.getRecords().get(k).keySet().iterator();
-	
-				if (iterCol.hasNext())
-				{
-					iterCol.next();
-				}
-				if (iterColkey.hasNext())
-				{
-					iterColkey.next();
-				}
-	
-				while (iterCol.hasNext())
-				{
-					recordMatrix[k -((100*pageNumber)-100)][counter] = String.valueOf(iterCol.next());
-					counter++;
-				}
-			}
-		}
-		
-		for (Field listOfField : loginService.LoginToSalesforce().describeSObject(sObjectName).getFields())
-		{
-			sObjectFieldNames.add(listOfField.getName().toString());
-		}
-		
+		map.put("sobjectRecords", res.getRecords().subList(100*pageNumber, ((pageNumber+1)*100 > res.getTotalSize()) ? res.getTotalSize() : (pageNumber+1)*100));
+		map.put("sobjectFieldNames", res.getRecords().get(0).keySet());
 		map.put("pagination", paginationPages);
-		map.put("sobjectFieldNames", sObjectFieldNames);
-		map.put("sobjectRecords", recordMatrix);
-		
 		return "sobject";
 	}
 	
@@ -190,97 +126,25 @@ public class SObjectController
 			final ServletServerHttpRequest inputMessage = new ServletServerHttpRequest(request);
 			final Map<String, String> formData = new FormHttpMessageConverter().read(null, inputMessage).toSingleValueMap();
 			final String soqlquery = formData.get("soqlquery");
-			final Map<String, String> paginationPages = new HashMap<String, String>();
-			String[][] recordMatrix = null;
-	
-			Iterator<String> iterCol = null;
-			Iterator<String> iterColkey = null;
-		
+			
+			paginationPages = new HashMap<String, String>();
+			
 			if (!soqlquery.isEmpty())
 			{
 				res = new QueryResult<Map>();
 				res.setTotalSize(2000);
 				res = loginService.LoginToSalesforce().query(soqlquery);
-				if (res.getTotalSize() > 0)
-				{
-					if (res.getTotalSize() > PAGESIZE)
-					{
-						recordMatrix = new String[res.getRecords().subList(0, PAGESIZE).size()][res.getRecords().get(0).keySet().size()];
-						
-						Integer counter=1;
-						for (Integer k = 0; k<res.getTotalSize(); k+=PAGESIZE, counter++)
-						{
-							paginationPages.put(counter.toString(), "/login/sobject/query/"+ sObjectName +"/" + counter.toString());
-						}
-					}
-					else
-					{
-						recordMatrix = new String[res.getRecords().size()][res.getRecords().get(0).keySet().size()];
-					}
-				}
 			}
-		
-			if (res.getTotalSize() > 0)
-			{	
-				if (res.getTotalSize() > 100)
-				{
-					for (int k=0; k< res.getRecords().subList(0, 100).size(); k++)
-					{
-						int counter = 0;
-						iterCol = res.getRecords().get(k).values().iterator();
-						iterColkey = res.getRecords().get(k).keySet().iterator();
-				
-						if (iterCol.hasNext())
-						{
-							iterCol.next();
-						}
-						if (iterColkey.hasNext())
-						{
-							iterColkey.next();
-						}
-				
-						while (iterCol.hasNext())
-						{
-							recordMatrix[k][counter] = String.valueOf(iterCol.next());
-							counter++;
-						}
-					}
-				}
-				else
-				{
-					for (int k=0; k< res.getRecords().size(); k++)
-					{
-						int counter = 0;
-						iterCol = res.getRecords().get(k).values().iterator();
-						iterColkey = res.getRecords().get(k).keySet().iterator();
-				
-						if (iterCol.hasNext())
-						{
-							iterCol.next();
-						}
-						if (iterColkey.hasNext())
-						{
-							iterColkey.next();
-						}
-				
-						while (iterCol.hasNext())
-						{
-							recordMatrix[k][counter] = String.valueOf(iterCol.next());
-							counter++;
-						}
-					}
-				}
-				map.put("sobjectRecords", recordMatrix);
-			}
-		
-			for (Field listOfField : loginService.LoginToSalesforce().describeSObject(sObjectName).getFields())
+
+			for (Integer k = 100, pagecounter=Math.abs(res.getTotalSize()/100); k<res.getTotalSize(); k+=PAGESIZE, pagecounter--)
 			{
-				sObjectFieldNames.add(listOfField.getName().toString());
+				paginationPages.put(pagecounter.toString(), "/login/sobject/query/"+ sObjectName +"/" + pagecounter.toString());
 			}
 			
-			map.put("sobjectFieldNames", sObjectFieldNames);
+			map.put("sobjectRecords", res.getRecords().subList(0, 100));
+			map.put("sobjectFieldNames", res.getRecords().get(0).keySet());
 			map.put("pagination", paginationPages);
-			
+
 			return "sobject";
 		
 		} catch (Exception e) {
@@ -331,6 +195,7 @@ public class SObjectController
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/create/{sobject}", method = RequestMethod.POST)
 	public String createNewSObject(@PathVariable("sobject") String SObject, HttpServletRequest request, Map<String, Object> map, HttpServletResponse response) throws HttpMessageNotReadableException, IOException
 	{
@@ -339,6 +204,7 @@ public class SObjectController
 			final ServletServerHttpRequest inputMessage = new ServletServerHttpRequest(request);
 			final Map<String, String> formData = new FormHttpMessageConverter().read(null, inputMessage).toSingleValueMap();
 			Map<String, String> formFieldMap = new HashMap<String, String>();
+			
 			for (Field sobjectRequiredFields : loginService.LoginToSalesforce().describeSObject(SObject).getRequiredFieldsForCreateUpdate())
 			{
 				formFieldMap.put(sobjectRequiredFields.getName().toString(), formData.get(sobjectRequiredFields.getName().toString()));
@@ -360,30 +226,22 @@ public class SObjectController
 		}
 	}
 	
-	@RequestMapping(value="/edit/{sobject}/{sobjectId}")
+	@RequestMapping(value="/edit/{sobject}/{sobjectId}", method=RequestMethod.POST)
 	public String editSObjectView(@PathVariable("sobject") String SObject, @PathVariable("sobjectId") String sobjectId, HttpServletRequest request, Map<String, Object> map, HttpServletResponse response) throws JsonParseException, JsonMappingException, IOException
 	{
 		try
 		{
-			Map<String, String> requiredFieldNames = new HashMap<String, String>();
-			Map<String, String> optionalFieldNames = new HashMap<String, String>();
+			
+			ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+			HttpSession session = attr.getRequest().getSession(false);
+			session.setAttribute("sobjectRecord", sobjectId);
 			
 			@SuppressWarnings("unchecked")
-			Map<String, String> res = (Map<String, String>) loginService.LoginToSalesforce().getSObject(SObject, sobjectId).asMap();
+			Map<Object, Object> res = (Map<Object, Object>) loginService.LoginToSalesforce().getSObject(SObject, sobjectId).asMap();
+			res.remove(String.valueOf("attributes"));
+		
+			map.put("requiredEditSobjectFieldNames", res);
 			
-			for (Field sobjectRequiredFields : loginService.LoginToSalesforce().describeSObject(SObject).getRequiredFieldsForCreateUpdate())
-			{
-				requiredFieldNames.put(sobjectRequiredFields.getName().toString(), String.valueOf(res.get(sobjectRequiredFields.getName()).toString()));
-			}
-			for (Field sobjectOptionalFields : loginService.LoginToSalesforce().describeSObject(SObject).getOptionalFieldsForCreateUpdate())
-			{
-				optionalFieldNames.put(sobjectOptionalFields.getName().toString(), String.valueOf(res.get(sobjectOptionalFields.getName()).toString()));
-			}
-			System.out.println("Final REQ: " + requiredFieldNames);
-			System.out.println("Final OPT: " + optionalFieldNames);
-			
-			map.put("requiredSobjectFieldNames", requiredFieldNames);
-			map.put("optionalSobjectFieldNames", optionalFieldNames);
 			return "sobject";
 			
 		} catch (Exception e) {
@@ -392,7 +250,8 @@ public class SObjectController
 		}
 	}
 	
-	/*@RequestMapping(value="/edit/{sobject}/{sobjectId}", method = RequestMethod.POST)
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value="/save/{sobject}/{sobjectId}", method = RequestMethod.POST)
 	public String editSObject(@PathVariable("sobject") String SObject, @PathVariable("sobjectId") String sobjectId, HttpServletRequest request, Map<String, Object> map, HttpServletResponse response) throws JsonParseException, JsonMappingException, IOException
 	{
 		try
@@ -401,24 +260,38 @@ public class SObjectController
 			final Map<String, String> formData = new FormHttpMessageConverter().read(null, inputMessage).toSingleValueMap();
 			Map<String, String> formFieldMap = new HashMap<String, String>();
 		
-			for (Field sobjectRequiredFields : loginService.LoginToSalesforce().describeSObject(SObject).getRequiredFieldsForCreateUpdate())
+			for (Field sobjectRequiredFields : loginService.LoginToSalesforce().describeSObject(SObject).getOptionalFieldsForCreateUpdate())
 			{
-				formFieldMap.put(sobjectRequiredFields.getName().toString(), formData.get(sobjectRequiredFields.getName().toString()));
+			
+					if (!sobjectRequiredFields.getName().contains("Date"))
+					{
+						if (sobjectRequiredFields.isUpdateable())
+						{
+							formFieldMap.put(sobjectRequiredFields.getName().toString(), formData.get(sobjectRequiredFields.getName().toString()));
+					
+						}
+					}
 			}
-		
+					
 			JSONObject json = new JSONObject();
 			json.putAll(formFieldMap);
+			
 			ObjectMapper mapper = new ObjectMapper();
+			mapper.setSerializationInclusion(JsonSerialize.Inclusion.NON_EMPTY);
 			mapper.setSerializationInclusion(JsonSerialize.Inclusion.NON_NULL);
+			
 			Object updatedSObject = (Object) mapper.readValue(json.toJSONString(), Object.class);
-		
+			System.out.println("Update Object: " + updatedSObject);
+			
 			loginService.LoginToSalesforce().updateSObject(SObject, sobjectId, updatedSObject);
+			map.put("sobjectsuccessedit", sobjectId);
+			
 			return "sobject";
 		} catch (Exception e) {
 			map.put("soqlqueryerror", e.getMessage());
 			return "sobject";
 		}
-	}*/
+	}
 	
 		
 }
