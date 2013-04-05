@@ -26,8 +26,8 @@
     
     <fss:oauth logout-url="/logout" default-logout-success="/" store-data-in-session="true">
         <fss:oauthInfo endpoint="http://login.salesforce.com"
-                       oauth-key="3MVG9yZ.WNe6byQAgr3cpUvnVaKG0ru15nJj8mMR5yHrMZD8XxRjBiSKQufvDtLnJd3HwTiEDh0HMwOG91L8O"
-                       oauth-secret="1420123792886577044"/>
+                       oauth-key="#{systemEnvironment['OAUTH_CLIENT_KEY']}"
+                       oauth-secret="#{systemEnvironment['OAUTH_CLIENT_SECRET']}"/>
     </fss:oauth>
     
      <!--suppress SpringModelInspection -->
@@ -41,7 +41,7 @@
 	    <property name="host" value="smtp.gmail.com"/>
 	    <property name="port" value="587"/>
 	    <property name="username" value="thysmichels@gmail.com"/>
-	    <property name="password" value="Andries7!@#"/>
+	    <property name="password" value="#{systemEnvironment['EMAIL_PASSWORD']}"/>
 	    <property name="javaMailProperties">
 	        <props>
 	        	<!-- Use SMTP transport protocol -->
