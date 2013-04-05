@@ -47,12 +47,9 @@ public class SObjectController
 	private static final String SELECT = "SELECT ";
 	private static final String FROM = "FROM ";
 	private static List<String> sObjectFieldNames = null;
-	private static QueryResult<Map> res = null;
-	private static String[][] recordMatrix = null;
-	private static String[][] pageMatrix = null;
+	private static QueryResult<Map> res = null;	
 	private static Map<String, String> paginationPages =null;
-	private static Integer colNumber = 0;
-	
+
 	@Autowired
     private LoginService loginService;
 
@@ -141,7 +138,7 @@ public class SObjectController
 				paginationPages.put(pagecounter.toString(), "/login/sobject/query/"+ sObjectName +"/" + pagecounter.toString());
 			}
 			
-			map.put("sobjectRecords", res.getRecords().subList(0, 100));
+			map.put("sobjectRecords",res.getRecords().subList(0, (100 > res.getTotalSize()) ? res.getTotalSize() : 100));
 			map.put("sobjectFieldNames", res.getRecords().get(0).keySet());
 			map.put("pagination", paginationPages);
 
