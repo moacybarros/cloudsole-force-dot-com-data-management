@@ -33,7 +33,7 @@ Then run it with:
     $ java -jar target/dependency/webapp-runner.jar target/*.war
 
 Screenshots:
-    ![Alt text](thysmichels/cloudsole-force-dot-com-data-management/img/CloudSole Force.com Data Management.png "Login Screen")
+    ![Alt text](/thysmichels/cloudsole-force-dot-com-data-management/img/CloudSole%20Data%20Management%202.png "Login Screen")
 
 
 Try it now: http://cloudsole.herokuapp.com
