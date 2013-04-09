@@ -3,45 +3,24 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="span8">
-         <section id="manage-users">
+         <section id="manage-sobjects">
           <div class="page-header">
             <h1>Manage ${currentSObject} Object</h1>
           </div>
-          <c:if  test="${!empty sobjectsuccesscreate}">
+		   <c:if  test="${!empty success}">
            <div class="alert alert-success">
           	 <button type="button" class="close" data-dismiss="alert">×</button>
  			 <strong>Success:</strong>
- 			 	Your record has been created. Id: ${sobjectsuccesscreate}
+ 			 	${success}
 		   </div>
 		   </c:if>
-		   <c:if  test="${!empty sobjectsuccessdelete}">
-           <div class="alert alert-success">
-          	 <button type="button" class="close" data-dismiss="alert">×</button>
- 			 <strong>Success:</strong>
- 			 	Your record was deleted successfully
-		   </div>
-		   </c:if>
-		   <c:if  test="${!empty sobjectsuccessedit}">
-           <div class="alert alert-success">
-          	 <button type="button" class="close" data-dismiss="alert">×</button>
- 			 <strong>Success:</strong>
- 			 	Your record was updated successfully. Id: ${sobjectsuccessedit}
-		   </div>
-		   </c:if>
-		   <c:if  test="${!empty sobjecterror}">
+		   <c:if  test="${!empty error}">
 		   <div class="alert alert-error">
              <button type="button" class="close" data-dismiss="alert">×</button>
  			 <strong>Error:</strong>
- 			 	Message: ${sobjecterror}
+ 			 	${error}
 		   </div>
-		    </c:if>
-		    <c:if  test="${!empty soqlqueryerror}">
-		   <div class="alert alert-error">
-             <button type="button" class="close" data-dismiss="alert">×</button>
- 			 <strong>Error:</strong>
- 			 	Message: ${soqlqueryerror}
-		   </div>
-		    </c:if>
+		   </c:if>
            <div class="tabbable">              
    			 <ul class="nav nav-tabs" id="getStartedTab">
           	  	<li><a href="/login/sobject/query/${currentSObject}" onClick="return objvalidate.checkIfSObjectSelected('${currentSObject}')">Query</a></li>
@@ -52,13 +31,67 @@
           	   <div class="tab-content">
           	    <div id="/login/sobject/query/${currentSObject}" class="tab-pane active">
           	  	<c:if  test="${!empty sobjectQuery}">
-          	  		<form method="POST" action=""> <textarea name="soqlquery" id="soqlquery">${sobjectQuery}</textarea><br />
-          	  		<button class="btn" type="submit">Run</button></form>
+          	  	<div class="accordion" id="accordion2">
+  					<div class="accordion-group">
+    					<div class="accordion-heading">
+      						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+       						 Build SOQL Query
+      						</a>
+    					</div>
+    			<div id="collapseOne" class="accordion-body collapse">
+      				<div class="accordion-inner">
+      				<form action="POST">
+      				<table>
+      				
+      			 	<c:forEach items="${sobjectFieldNamesSOQL}" var="fieldNames" varStatus="status">
+      			 	<c:choose>
+      			 	 <c:when test="${status.first}">
+      			 	 <tr><td><input type="checkbox" name="soqlcheck" >${fieldNames}</td>
+      			 	 </c:when>
+      			 	 <c:when test="${status.last}">
+      			 	 </tr>
+      			 	 </c:when>
+                     <c:when test="${(status.count % 5) == 0}">
+                     	<td>
+      			 				<input type="checkbox" name="soqlcheck">${fieldNames}
+      			 		</td>
+                     </tr>
+                     </c:when>
+                     <c:when test="${(status.count % 5) == 1}">
+                     <tr>
+                     	<td>
+      			 				<input type="checkbox" name="soqlcheck">${fieldNames}
+      			 		</td>
+                     </c:when>
+                    <c:otherwise>
+                     		<td>
+      			 				<input type="checkbox" name="soqlcheck" >${fieldNames}
+      			 			</td>
+                    	 </c:otherwise>
+                     </c:choose>
+  
+      			 	</c:forEach>
+      				
+      			 </table>
+      			 <a href="/login/sobject/query/build" class="btn btn-primary btn-mini">Build Query</a>
+      			 </form>
+        		</div>
+      			</div>
+   			 </div>
+  			</div>
+          	
+          	<form method="POST" action=""> <textarea name="soqlquery" id="soqlquery">${sobjectQuery}</textarea><br />
+          	  <button class="btn btn-primary" type="submit">Run</button></form>
           	  	</c:if>
           	  	</div>
           	  	</div>
           	  	<div class="tab-content">
           	  	<div id="/login/sobject/view/${currentSObject}" class="tab-pane active">
+          	  	 <c:if test="${!empty sobjectRecords}">
+          	  	 	<ul class="nav nav-pills line_sep">
+          	  	 	<a href="/login/sobject/query/download/${currentSObject}" class="btn btn-primary btn-mini pull-left">Download</a>
+          	  	 	</ul>
+          	  	 </c:if>
           	 	<c:if  test="${!empty sobjectFieldNames}">
                 <table class="table table-bordered table-striped">
                     <thead>

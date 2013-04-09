@@ -23,7 +23,7 @@
         </repository>
     </repositories>
 
-    <dependencies>
+    <dependencies>    
         <dependency>
             <groupId>com.github.twitter</groupId>
             <artifactId>bootstrap</artifactId>

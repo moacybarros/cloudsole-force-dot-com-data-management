@@ -16,9 +16,9 @@
     <link href="/resources/bootstrap/css/prettify.css" rel="stylesheet">
     <style type="text/css" media="screen">
     textarea{ 
-  		width: 800px; 
- 		 min-width:200px; 
- 		 max-height:800px; 
+  		 width: 1000px; 
+ 		 min-width:300px; 
+ 		 max-height:1000px; 
 
   		height:500px; 
   		min-height:200px;  
