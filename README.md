@@ -1,4 +1,4 @@
-# Spring MVC REST API Data Management Application
+# Force.com REST Data Management
 
     Try it now: http://cloudsole-data.herokuapp.com/
 
