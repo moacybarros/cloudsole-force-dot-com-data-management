@@ -47,6 +47,6 @@ public class ContactController
 		message.setText(body);
 		
 		mailSender.send(message);
-        return "redirect:/login/";
+        return "redirect:/contact/";
     }
 }

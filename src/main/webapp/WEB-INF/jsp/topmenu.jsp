@@ -46,26 +46,26 @@
       			 	<c:forEach items="${sobjectFieldNamesSOQL}" var="fieldNames" varStatus="status">
       			 	<c:choose>
       			 	 <c:when test="${status.first}">
-      			 	 <tr><td><input type="checkbox" name="soqlcheck" >${fieldNames}</td>
+      			 	 <tr><td><input type="checkbox" name="${fieldNames}" id="${fieldNames}">${fieldNames}</td>
       			 	 </c:when>
       			 	 <c:when test="${status.last}">
       			 	 </tr>
       			 	 </c:when>
                      <c:when test="${(status.count % 5) == 0}">
                      	<td>
-      			 				<input type="checkbox" name="soqlcheck">${fieldNames}
+      			 				<input type="checkbox" name="${fieldNames}" id="${fieldNames}">${fieldNames}
       			 		</td>
                      </tr>
                      </c:when>
                      <c:when test="${(status.count % 5) == 1}">
                      <tr>
                      	<td>
-      			 				<input type="checkbox" name="soqlcheck">${fieldNames}
+      			 				<input type="checkbox" name="${fieldNames}" id="${fieldNames}">${fieldNames}
       			 		</td>
                      </c:when>
                     <c:otherwise>
                      		<td>
-      			 				<input type="checkbox" name="soqlcheck" >${fieldNames}
+      			 				<input type="checkbox" name="${fieldNames}" id="${fieldNames}">${fieldNames}
       			 			</td>
                     	 </c:otherwise>
                      </c:choose>
@@ -73,7 +73,7 @@
       			 	</c:forEach>
       				
       			 </table>
-      			 <a href="/login/sobject/query/build" class="btn btn-primary btn-mini">Build Query</a>
+      			 <a href="/login/sobject/query/${currentSObject}/soqlbuilder" class="btn btn-primary btn-mini">Build Query</a>
       			 </form>
         		</div>
       			</div>

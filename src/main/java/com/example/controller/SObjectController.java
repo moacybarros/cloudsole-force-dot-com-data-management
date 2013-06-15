@@ -68,6 +68,33 @@ public class SObjectController
 		return queries;
 	}
 	
+	@RequestMapping(value="/query/{sobjectName}/soqlbuilder", method=RequestMethod.GET)
+	public String buildDynamicSOQLfromCheckBoxes(@PathVariable("sobjectName") String sObjectName, HttpServletRequest request, Map<String, Object> map) throws HttpMessageNotReadableException, IOException
+	{
+		final ServletServerHttpRequest inputMessage = new ServletServerHttpRequest(request);
+		final Map<String, String> formData = new FormHttpMessageConverter().read(null, inputMessage).toSingleValueMap();
+		
+		//List<String> listOfSelectedColumns = new ArrayList<String>();
+		
+		/*for (Field listOfField : loginService.LoginToSalesforce().describeSObject(sObjectName).getFields())
+		{
+			System.out.println(formData.get(listOfField.getName().toString()));
+			if (formData.get(listOfField.getName().toString()) != null)
+			{
+				listOfSelectedColumns.add(listOfField.getName().toString());
+			}
+			
+		}*/
+		
+		//final String id = formData.get("Id");
+		//listOfSelectedColumns.add("laas");
+		
+		//map.put("sobjectQuery", listOfSelectedColumns);
+		
+		return "sobject";
+	}
+	
+	
 	@RequestMapping(value="/query/download/{sobjectName}", method=RequestMethod.GET)
 	public String downloadSObjectToCSV(@PathVariable("sobjectName") String sObjectName, Map<String, Object> map, HttpServletResponse response) throws Exception
 	{
@@ -113,7 +140,6 @@ public class SObjectController
 	@RequestMapping(value="/query/build", method= RequestMethod.GET)
 	public String buildQuery(Map<String, Object> map)
 	{
-		System.out.println("hier");
 		return "sobject";
 	}
 	
@@ -179,7 +205,7 @@ public class SObjectController
 			final String soqlquery = formData.get("soqlquery");
 			Map<String, String> unsortedpaginationPages = new HashMap<String, String>();
 				
-			if (!soqlquery.isEmpty())
+			if (soqlquery.isEmpty())
 			{
 				res = new QueryResult<Map>();
 				res.setTotalSize(2000);
@@ -290,7 +316,6 @@ public class SObjectController
 	{
 		try
 		{
-			
 			ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 			HttpSession session = attr.getRequest().getSession(false);
 			session.setAttribute("sobjectRecord", sobjectId);
@@ -340,7 +365,6 @@ public class SObjectController
 			mapper.setSerializationInclusion(JsonSerialize.Inclusion.NON_NULL);
 			
 			Object updatedSObject = (Object) mapper.readValue(json.toJSONString(), Object.class);
-			System.out.println("Update Object: " + updatedSObject);
 			
 			loginService.LoginToSalesforce().updateSObject(SObject, sobjectId, updatedSObject);
 			map.put("success", "Your record was updated successfully. Id:" + sobjectId);

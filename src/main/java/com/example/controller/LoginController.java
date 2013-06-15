@@ -24,9 +24,7 @@ public class LoginController {
     public String LoginToCloudSole(Map<String, Object> map) 
     {
     	ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-		HttpSession session = attr.getRequest().getSession(true); //create a new session
-			// put the UserDetails object here.
-	
+		HttpSession session = attr.getRequest().getSession(true);
 		session.setAttribute("userName", ForceSecurityContextHolder.get().getUserName());
 		session.setAttribute("showSObjects", loginService.showSObjects());
 	
