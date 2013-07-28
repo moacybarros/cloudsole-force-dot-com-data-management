@@ -10,10 +10,11 @@
   	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   	 <!-- Bootstrap framework -->
-    <link href="/resources/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link href="/resources/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="/resources/bootstrap/css/docs.css" rel="stylesheet">
-    <link href="/resources/bootstrap/css/prettify.css" rel="stylesheet">
+   <!-- Styles and icons -->
+    <link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/bootstrap/css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="/resources/bootstrap/css/prettify.css" />
+    <link rel="stylesheet" href="/resources/bootstrap/css/css.css">
     <style type="text/css" media="screen">
     textarea{
     	 width: 99%;
@@ -46,10 +47,6 @@
     </div>
  
   <header class="jumbotron subhead" id="overview">
-  <div class="container">
-    <h1>Welcome to CloudSole</h1>
-    <p class="lead">Salesforce Data Management Tool</p>
-  </div>
-</header>
+  </header>
 <body data-spy="scroll" data-target=".bs-docs-sidebar">
     
