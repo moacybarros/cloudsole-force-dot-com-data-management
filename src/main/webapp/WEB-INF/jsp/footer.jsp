@@ -18,6 +18,9 @@
     <script src="/resources/bootstrap/js/bootstrap-affix.js"></script>
     <script src="/resources/bootstrap/js/application.js"></script>
 	<link rel="stylesheet" href="/resources/bootstrap/css/font-awesome.min.css">
-    
+  		
+  		</div>
+	</div>
+</div>  
 </body>
 </html>

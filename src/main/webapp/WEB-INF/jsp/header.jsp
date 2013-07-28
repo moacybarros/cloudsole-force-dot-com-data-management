@@ -23,7 +23,10 @@
     </style>
     
 </head>
+
 <body data-spy="scroll" data-target=".bs-docs-sidebar">
+<div id="wrapper">
+	<div id="wrapper-inner">
 	<div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
@@ -46,6 +49,6 @@
         </div>
       </div>
     </div>
-
+<div id="content">
 
     
