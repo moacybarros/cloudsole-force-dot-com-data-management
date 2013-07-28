@@ -107,7 +107,7 @@
 </div>
     <footer id="footer" class="footer">
       <div class="container" height="100%">
-        <p>Copyright 2011-2013 <a href="http://thysmichels.com">Thys Michels</a>.</p>
+        <p>Copyright 2013 <a href="http://thysmichels.com">Thys Michels</a>.</p>
       </div>
     </footer>
 </div>

@@ -23,6 +23,7 @@
     </style>
     
 </head>
+<body data-spy="scroll" data-target=".bs-docs-sidebar">
 	<div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
@@ -45,11 +46,6 @@
         </div>
       </div>
     </div>
- 
-  <header class="jumbotron subhead" id="overview">
-  <div class="container">
-    <h1>Salesforce Data Manager</h1>
-  </div>
-</header>
-<body data-spy="scroll" data-target=".bs-docs-sidebar">
+
+
     
