@@ -48,7 +48,7 @@
  
   <header class="jumbotron subhead" id="overview">
   <div class="container">
-    <h1>Salesforce Data Management</h1>
+    <h1>Salesforce Data Manager</h1>
   </div>
 </header>
 <body data-spy="scroll" data-target=".bs-docs-sidebar">
