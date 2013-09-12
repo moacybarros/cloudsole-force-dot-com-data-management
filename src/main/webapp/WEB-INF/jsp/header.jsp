@@ -36,7 +36,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="/login/">CloudSole</a>
+          <a class="brand" href="/login/">CloudSole Data</a>
           <div class="nav-collapse collapse">
             <p class="navbar-text pull-right">
               Logged in as ${userName}

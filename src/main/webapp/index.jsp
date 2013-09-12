@@ -32,7 +32,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="/">CloudSole</a>
+          <a class="brand" href="/">CloudSole Data</a>
           <div class="nav-collapse collapse">
             <ul id="navlist" class="nav">
               <li id="navindex"><a href="/">Home</a></li>
