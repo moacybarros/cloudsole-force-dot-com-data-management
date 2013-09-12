@@ -68,7 +68,7 @@ public class SObjectController
 	}
 	
 
-	@RequestMapping(value="/query/download/{sobjectName}", method=RequestMethod.GET)
+	@RequestMapping(value="/view/download/{sobjectName}", method=RequestMethod.GET)
 	public void downloadSObjectToCSV(@PathVariable("sobjectName") String sObjectName, Map<String, Object> map, HttpServletResponse response) throws Exception
 	{
 		 File file = SObjectUtil.createTempCSVFile(res);

@@ -42,8 +42,12 @@
           	  	<!-- VIEW -->
           	  	<div class="tab-content">
           	  	<div id="/login/sobject/view/${currentSObject}" class="tab-pane active">
-          	  	
-          	 	<!--<c:if  test="${!empty sobjectFieldNames}">-->
+          	  	 <c:if test="${!empty sobjectRecords}">
+          	  	 	<ul class="nav nav-pills line_sep">
+          	  	 	<a href="/login/sobject/view/download/${currentSObject}" class="btn btn-primary btn-mini pull-left">Download</a>
+          	  	 	</ul>
+          	  	 </c:if>
+          	 	<c:if  test="${!empty sobjectFieldNames}">
                 <table class="table table-bordered table-striped">
                     <thead>
                     <tr>
@@ -95,7 +99,7 @@
   					</c:if>
   				</ul>
   				</div>
-           		<!--</c:if>-->
+           		</c:if>
            		</div>
           	  </div>
           	  <!-- End View -->
