@@ -204,7 +204,7 @@ public class SObjectController
 		}		
 	}
 	
-	@RequestMapping(value="/delete/{sobject}/{sobjectId}", method=RequestMethod.GET)
+	@RequestMapping(value="/delete/{sobject}/{sobjectId}", method=RequestMethod.POST)
 	public String deleteSObjects(@PathVariable("sobject") String SObject, @PathVariable("sobjectId") String sobjectId, HttpServletRequest request, Map<String, Object> map, HttpServletResponse response)
 	{
 		try
