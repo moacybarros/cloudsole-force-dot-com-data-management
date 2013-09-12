@@ -1,7 +1,7 @@
 
 	
     <script src="/resources/bootstrap/js/widgets.js"></script>
-    <script src="/resources/bootstrap/js/jquery.js"></script>
+    <script src="/resources/bootstrap/js/jquery.min.js"></script>
     <script src="/resources/bootstrap/js/google-code-prettify/prettify.js"></script>
     <script src="/resources/bootstrap/js/bootstrap-transition.js"></script>
     <script src="/resources/bootstrap/js/bootstrap-alert.js"></script>

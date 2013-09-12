@@ -27,7 +27,7 @@
                 		<textarea name="body" id="body"></textarea>
                 	</div>
                 </div>
-                <button class="btn btn-primary btn-mini pull-left" type="submit">Send Email</button>
+                <button class="btn btn-primary" type="submit">Send Email</button>
              </fieldset>   
     	</form>
     </div>

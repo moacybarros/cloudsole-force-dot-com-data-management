@@ -24,6 +24,7 @@
     </repositories>
 
     <dependencies>
+    	
     	<dependency>
   			<groupId>org.scribe</groupId>
   			<artifactId>scribe</artifactId>
