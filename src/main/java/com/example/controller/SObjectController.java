@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,35 +67,9 @@ public class SObjectController
 		return queries;
 	}
 	
-	@RequestMapping(value="/query/{sobjectName}/soqlbuilder", method=RequestMethod.GET)
-	public String buildDynamicSOQLfromCheckBoxes(@PathVariable("sobjectName") String sObjectName, HttpServletRequest request, Map<String, Object> map) throws HttpMessageNotReadableException, IOException
-	{
-		final ServletServerHttpRequest inputMessage = new ServletServerHttpRequest(request);
-		final Map<String, String> formData = new FormHttpMessageConverter().read(null, inputMessage).toSingleValueMap();
-		
-		//List<String> listOfSelectedColumns = new ArrayList<String>();
-		
-		/*for (Field listOfField : loginService.LoginToSalesforce().describeSObject(sObjectName).getFields())
-		{
-			System.out.println(formData.get(listOfField.getName().toString()));
-			if (formData.get(listOfField.getName().toString()) != null)
-			{
-				listOfSelectedColumns.add(listOfField.getName().toString());
-			}
-			
-		}*/
-		
-		//final String id = formData.get("Id");
-		//listOfSelectedColumns.add("laas");
-		
-		//map.put("sobjectQuery", listOfSelectedColumns);
-		
-		return "sobject";
-	}
-	
-	
+
 	@RequestMapping(value="/query/download/{sobjectName}", method=RequestMethod.GET)
-	public String downloadSObjectToCSV(@PathVariable("sobjectName") String sObjectName, Map<String, Object> map, HttpServletResponse response) throws Exception
+	public void downloadSObjectToCSV(@PathVariable("sobjectName") String sObjectName, Map<String, Object> map, HttpServletResponse response) throws Exception
 	{
 		 File file = SObjectUtil.createTempCSVFile(res);
 		 
@@ -116,15 +89,13 @@ public class SObjectController
 	    	 file.deleteOnExit();
 	     }
 		
-		return "sobject";
 	}
 
 	@RequestMapping(value="/view/{sobjectName}", method = RequestMethod.GET)
 	 public String viewSObjects(@PathVariable("sobjectName") String sObjectName, Map<String, Object> map){
 		try
 		{
-			for (Field listOfField : loginService.LoginToSalesforce().describeSObject(sObjectName).getFields())
-			{
+			for (Field listOfField : loginService.LoginToSalesforce().describeSObject(sObjectName).getFields()){
 				sObjectFieldNames.add(listOfField.getName().toString());
 			}
 		
@@ -178,7 +149,7 @@ public class SObjectController
 	}
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value="/query/{sobjectName}/{pageNumber}")
+	@RequestMapping(value="/view/{sobjectName}/{pageNumber}")
 	public String querySObjectsReturnViewPaging(@PathVariable("sobjectName") String sObjectName, @PathVariable("pageNumber") Integer pageNumber, HttpServletRequest request, Map<String, Object> map, HttpServletResponse response) throws HttpMessageNotReadableException, IOException
 	{
 		try
@@ -195,7 +166,7 @@ public class SObjectController
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@RequestMapping(value="/query/{sobjectName}", method = RequestMethod.POST)
+	@RequestMapping(value="/view/{sobjectName}", method = RequestMethod.POST)
 	public String querySObjectsReturnView(@PathVariable("sobjectName") String sObjectName, HttpServletRequest request, Map<String, Object> map, HttpServletResponse response) throws HttpMessageNotReadableException, IOException
 	{
 		try 
@@ -205,7 +176,7 @@ public class SObjectController
 			final String soqlquery = formData.get("soqlquery");
 			Map<String, String> unsortedpaginationPages = new HashMap<String, String>();
 				
-			if (soqlquery.isEmpty())
+			if (!soqlquery.isEmpty())
 			{
 				res = new QueryResult<Map>();
 				res.setTotalSize(2000);
@@ -214,24 +185,26 @@ public class SObjectController
 
 			for (Integer k = 100, pagecounter=Math.abs(res.getTotalSize()/100); k<res.getTotalSize(); k+=PAGESIZE, pagecounter--)
 			{
-				unsortedpaginationPages.put(pagecounter.toString(), "/login/sobject/query/"+ sObjectName +"/" + pagecounter.toString());
+				unsortedpaginationPages.put(pagecounter.toString(), "/login/sobject/view/"+ sObjectName +"/" + pagecounter.toString());
 			}
 			
 			paginationPages = new TreeMap<String, String>(unsortedpaginationPages);
 			
+			
+		
 			map.put("sobjectRecords",res.getRecords().subList(0, (100 > res.getTotalSize()) ? res.getTotalSize() : 100));
 			map.put("sobjectFieldNames", res.getRecords().get(0).keySet());
 			map.put("pagination", paginationPages);
 
 			return "sobject";
-		
+			
 		} catch (Exception e) {
 			map.put("error", e.getMessage());
 			return "sobject";
-		}
+		}		
 	}
 	
-	@RequestMapping(value="/delete/{sobject}/{sobjectId}")
+	@RequestMapping(value="/delete/{sobject}/{sobjectId}", method=RequestMethod.GET)
 	public String deleteSObjects(@PathVariable("sobject") String SObject, @PathVariable("sobjectId") String sobjectId, HttpServletRequest request, Map<String, Object> map, HttpServletResponse response)
 	{
 		try
@@ -346,7 +319,6 @@ public class SObjectController
 		
 			for (Field sobjectRequiredFields : loginService.LoginToSalesforce().describeSObject(SObject).getOptionalFieldsForCreateUpdate())
 			{
-			
 					if (!sobjectRequiredFields.getName().contains("Date"))
 					{
 						if (sobjectRequiredFields.isUpdateable())

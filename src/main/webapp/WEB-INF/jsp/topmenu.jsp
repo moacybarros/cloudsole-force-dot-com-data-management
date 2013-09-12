@@ -28,71 +28,22 @@
           	 	<li><a href="/login/sobject/create/${currentSObject}" onClick="return objvalidate.checkIfSObjectSelected('${currentSObject}')">Create</a></li>
           	 	<li><a href="/login/sobject/edit/${currentSObject}/${sobjectRecord}" onClick="return objvalidate.checkIfSObjectSelected('${currentSObject}')">Edit</a></li>
           	 </ul>
+          	  <!-- Query -->
           	   <div class="tab-content">
-          	    <div id="/login/sobject/query/${currentSObject}" class="tab-pane active">
+          	  <div id="/login/sobject/query/${currentSObject}" class="tab-pane active">
           	  	<c:if  test="${!empty sobjectQuery}">
-          	  	<div class="accordion" id="accordion2">
-  					<div class="accordion-group">
-    					<div class="accordion-heading">
-      						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-       						 Build SOQL Query
-      						</a>
-    					</div>
-    			<div id="collapseOne" class="accordion-body collapse">
-      				<div class="accordion-inner">
-      				<form action="POST">
-      				<table>
-      				
-      			 	<c:forEach items="${sobjectFieldNamesSOQL}" var="fieldNames" varStatus="status">
-      			 	<c:choose>
-      			 	 <c:when test="${status.first}">
-      			 	 <tr><td><input type="checkbox" name="${fieldNames}" id="${fieldNames}">${fieldNames}</td>
-      			 	 </c:when>
-      			 	 <c:when test="${status.last}">
-      			 	 </tr>
-      			 	 </c:when>
-                     <c:when test="${(status.count % 5) == 0}">
-                     	<td>
-      			 				<input type="checkbox" name="${fieldNames}" id="${fieldNames}">${fieldNames}
-      			 		</td>
-                     </tr>
-                     </c:when>
-                     <c:when test="${(status.count % 5) == 1}">
-                     <tr>
-                     	<td>
-      			 				<input type="checkbox" name="${fieldNames}" id="${fieldNames}">${fieldNames}
-      			 		</td>
-                     </c:when>
-                    <c:otherwise>
-                     		<td>
-      			 				<input type="checkbox" name="${fieldNames}" id="${fieldNames}">${fieldNames}
-      			 			</td>
-                    	 </c:otherwise>
-                     </c:choose>
-  
-      			 	</c:forEach>
-      				
-      			 </table>
-      			 <a href="/login/sobject/query/${currentSObject}/soqlbuilder" class="btn btn-primary btn-mini">Build Query</a>
-      			 </form>
-        		</div>
-      			</div>
-   			 </div>
-  			</div>
-          	
-          	<form method="POST" action=""> <textarea name="soqlquery" id="soqlquery">${sobjectQuery}</textarea><br />
-          	  <button class="btn btn-primary" type="submit">Run</button></form>
+          			<form method="POST" action="/login/sobject/view/${currentSObject}"> <textarea name="soqlquery" id="soqlquery">${sobjectQuery}</textarea><br />
+          	  		<button class="btn btn-primary" type="submit">Run</button></form>
           	  	</c:if>
           	  	</div>
           	  	</div>
+          	  <!-- End Query -->
+          	  	
+          	  	<!-- VIEW -->
           	  	<div class="tab-content">
           	  	<div id="/login/sobject/view/${currentSObject}" class="tab-pane active">
-          	  	 <c:if test="${!empty sobjectRecords}">
-          	  	 	<ul class="nav nav-pills line_sep">
-          	  	 	<a href="/login/sobject/query/download/${currentSObject}" class="btn btn-primary btn-mini pull-left">Download</a>
-          	  	 	</ul>
-          	  	 </c:if>
-          	 	<c:if  test="${!empty sobjectFieldNames}">
+          	  	
+          	 	<!--<c:if  test="${!empty sobjectFieldNames}">-->
                 <table class="table table-bordered table-striped">
                     <thead>
                     <tr>
@@ -144,9 +95,12 @@
   					</c:if>
   				</ul>
   				</div>
-           		</c:if>
+           		<!--</c:if>-->
            		</div>
           	  </div>
+          	  <!-- End View -->
+          	  
+          	  
           	  <div class="tab-content">
           	  	<div id="/login/sobject/create/${currentSObject}" class="tab-pane active">
           	 	  <c:if  test="${!empty requiredSobjectFieldNames}">
@@ -173,6 +127,7 @@
            		 </c:if>
           	 	</div>
           	</div>
+          	
           	<div class="tab-content">
           	  	<div id="/login/sobject/edit/${currentSObject}/${sobjectRecord}" class="tab-pane active">
           	 	  <c:if  test="${!empty requiredEditSobjectFieldNames}">
@@ -210,4 +165,3 @@
         }
     };
 </script>
-  
