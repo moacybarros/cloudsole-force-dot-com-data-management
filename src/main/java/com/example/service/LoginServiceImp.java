@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.force.api.ApiConfig;
 import com.force.api.ApiSession;
@@ -52,6 +56,18 @@ public class LoginServiceImp implements LoginService {
 			return sObjectNames;
 		}
 	
+	}
+	
+	public static String getSessionId() {
+		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+		HttpSession session = attr.getRequest().getSession(false); //create a new session
+		return session.getAttribute("sessionId").toString();
+	}
+
+	public static String getEndpointURL() {
+		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+		HttpSession session = attr.getRequest().getSession(false); //create a new session
+		return session.getAttribute("endpoint").toString();
 	}
 	
 	
