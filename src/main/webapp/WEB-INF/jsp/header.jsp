@@ -43,8 +43,10 @@
             </p>
             <ul class="nav">
               <li class="active"><a href="/login/">Home</a></li>
+              <li><a href="/login/batch/job">Batch</a></li>
               <li><a href="/login/about">About</a></li>
               <li><a href="/login/contact">Contact</a></li>
+              
             </ul>
           </div><!--/.nav-collapse -->
         </div>
