@@ -34,8 +34,8 @@ public class BatchController {
 	private StringBuilder batchoutput = new StringBuilder();
 	
 	@RequestMapping(value="/job")
-	public String createBulkJobView(Map<String, Object> map)
-	{
+	public String createBulkJobView(Map<String, Object> map){
+		map.put("sObjects", loginService.showSObjects());
 		return "newbatchjob";
 	}
 	
