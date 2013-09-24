@@ -18,5 +18,6 @@
                 	<label class="control-label">Blog: http://www.thysmichels.com</label>
                 </div>
              </fieldset>   
+             
     </div>
 <jsp:include page="footer.jsp"/>
