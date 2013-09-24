@@ -35,7 +35,7 @@ public class BatchController {
 	
 	@RequestMapping(value="/job")
 	public String createBulkJobView(Map<String, Object> map){
-		map.put("sObjects", loginService.showSObjects());
+		map.put("sObjects", loginService.LoginToSalesforce().describeGlobal().getSObjects());
 		return "newbatchjob";
 	}
 	
