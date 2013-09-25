@@ -25,6 +25,8 @@ public class LoginController {
     {
     	ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 		HttpSession session = attr.getRequest().getSession(true);
+		session.setAttribute("endpoint", ForceSecurityContextHolder.get().getEndPointHost());
+		session.setAttribute("sessionId",  ForceSecurityContextHolder.get().getSessionId());
 		session.setAttribute("userName", ForceSecurityContextHolder.get().getUserName());
 		session.setAttribute("showSObjects", loginService.showSObjects());
 	

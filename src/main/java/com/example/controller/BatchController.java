@@ -59,12 +59,11 @@ public class BatchController {
 		//String filepath = formData.get("uni_file");
 		//TODO: auto create the path depending on the date
 		File tmpFile = File.createTempFile("cloudsole", ".csv");
-		System.out.println(tmpFile.getAbsolutePath());
 		batchoutput.append(new BulkAPIService().run(environment, operations, export_option, sobject, query_string, tmpFile.getAbsolutePath()));
 	
 		response.setContentType("application/csv"); 
 	    response.setContentLength(new Long(tmpFile.length()).intValue());
-	    response.setHeader("Content-Disposition","attachment; filename=CloudSole-Batch-" + sobject + ".csv");
+	    response.setHeader("Content-Disposition","attachment; filename=CloudSole-Data-" + sobject + ".csv");
 	 
 	     try {
 	    	 FileCopyUtils.copy(new FileInputStream(tmpFile), response.getOutputStream());
